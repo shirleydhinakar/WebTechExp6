@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Timer Functions and Objects</title>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h1>Digital Clock!</h1>
+            <p>Time: <span id="time"></span></p>
+            <script>
+                setInterval(display, 1000);
+                function display(){
+                    let d = new Date();
+                    document.getElementById("time").innerHTML = d.toLocaleTimeString();
+                } 
+            </script>
+        </div>   
+        <div id="q2">
+            <h1>Dynamic Background!</h1>
+            <p>The background color changes dynamically for every 30 seconds!</p>
+            <script>
+                setInterval(back,30000);
+                function back(){
+                    let red = Math.floor(Math.random()*255);
+                    let blue = Math.floor(Math.random()*255);
+                    let green = Math.floor(Math.random()*255);
+                    let color= "rgb("+red+","+green+","+blue+")";
+                    document.getElementById("q2").style.backgroundColor = color;
+                }
+            </script>
+        </div>
+        <div>
+            <h1>Change font size!</h1>
+            <p id="para" onmouseover="incSize()" onmouseout="decSize()">
+                Move cursor over me to view changes...
+            </p>
+            <script>
+                function incSize(){
+                    document.getElementById("para").style.fontSize = "24px";
+                }
+                function decSize(){
+                    document.getElementById("para").style.fontSize = "16px";
+                }
+            </script>
+        </div>
+        <div>
+            <h1>Drive  your Car!</h1>
+            <img id="car" src="img/car.jpg" style="width:100px;"/><br/>
+            <button onclick="moveRight()">Move</button><button onclick="stop()">Stop</button>
+            <script>
+                function init(){
+                    obj = document.getElementById("car");
+                    obj.style.position = "relative"; 
+                    obj.style.left = "0px";
+                }
+                function moveRight()
+                {
+                obj.style.left = parseInt(obj.style.left) + 1 + "px";
+                animate = setTimeout('moveRight()',10);
+                }
+                function stop()
+                {
+                clearTimeout(animate);
+                obj.style.left = '0px';
+                }
+                window.onload =init();
+            </script>
+        </div>
+        <div>
+            <h1>Student Information</h1>
+            <p id = "info"></p>
+            <button onclick="information()">Display Details</button>
+            <script>
+                function information(){
+                    let stud = [{ name:'John', r_num:'123', dob:'20-apr-1995' }, 
+                                { name:'Joseph', r_num:'456', dob:'05-jan-1998' }, 
+                                { name:'Ravi', r_num:'452', dob:'29-jun-2005' }, 
+                                { name:'Smith', r_num:'134', dob:'16-oct-2007' }, 
+                                { name:'Seetha', r_num:'302', dob:'15-jul-1974' },];
+                    let info = document.getElementById("info");
+                    let before_2000 = "";
+                    let after_2000 = "";
+                    for (let i = 0; i < stud.length; i++) {
+                        let year = parseInt(stud[i].dob.slice(-4));
+                        if (year <2000){
+                            before_2000 += stud[i].name+"'s Register Number is "+stud[i].r_num+"<br>";
+                        }
+                        else{
+                            after_2000 += stud[i].name+"'s Register Number is "+stud[i].r_num+"<br>";
+                        }
+                        
+                    }
+                    
+                    info.innerHTML += "Before 2000: "+"<br>"+before_2000;
+                    info.innerHTML += "After 2000: "+"<br>"+after_2000;
+                }
+            </script>
+        </div>
+    </body>
+</html>
